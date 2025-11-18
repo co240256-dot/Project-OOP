@@ -117,10 +117,18 @@ public class LibraryGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "ISBN and title cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        library.addBook(new Book(isbn, title));
-        refreshBookTable();
-        isbnField.setText("");
-        titleField.setText("");
+
+        boolean success = library.addBook(new Book(isbn, title));
+
+        if(success){
+            JOptionPane.showMessageDialog(this, "Book added succesfully", "Success",
+            JOptionPane.INFORMATION_MESSAGE);
+            refreshBookTable();
+            isbnField.setText("");
+            titleField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "A book already exists with this ISBN", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -179,8 +187,8 @@ public class LibraryGUI extends JFrame {
         panel.add(scrollPane, BorderLayout.CENTER);
         return panel;
     }
-
-    /**
+    
+     /**
      * Adds a new member to the library and updates the table.
      */
     private void addMember() {
@@ -190,12 +198,18 @@ public class LibraryGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Member ID and name cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        library.addMember(new Member(id, name));
-        refreshMemberTable();
-        memberIdField.setText("");
-        memberNameField.setText("");
-    }
+       boolean success = library.addMember(new Member(id, name));
 
+        if (success) {
+            JOptionPane.showMessageDialog(this, "Member added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            refreshMemberTable();
+            memberIdField.setText("");
+            memberNameField.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "A member already exists with this ID.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     /**
      * Populates the member table from the library data.
      */
