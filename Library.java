@@ -22,18 +22,29 @@ public class Library {
     }
 
     /**
-     * Adds a new book to the library. No duplicate checking is performed – that
-     * logic could be added as an enhancement.
+     * Adds a new book to the library. 
+     * returns true if the book was added, false if a book with this ISBN already exists.
      */
-    public void addBook(Book book) {
+    public boolean addBook(Book book) {
+
+        if (findBook(book.getIsbn()) != null){
+            return false;
+        }
         books.add(book);
+        return true;
     }
 
     /**
      * Adds a new member to the library.
+     * returns true if the member was added, false if a member with this ID already exists.
      */
-    public void addMember(Member member) {
+    public boolean addMember(Member member) {
+
+        if(findMember(member.getMemberID()) != null){
+            return false;
+        }
         members.add(member);
+        return true;
     }
 
     /**
