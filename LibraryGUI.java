@@ -99,6 +99,7 @@ public class LibraryGUI extends JFrame {
             }
         };
         bookTable = new JTable(bookTableModel);
+        bookTable.setAutoCreateRowSorter(true);
         JScrollPane scrollPane = new JScrollPane(bookTable);
 
         panel.add(form, BorderLayout.NORTH);
@@ -181,6 +182,7 @@ public class LibraryGUI extends JFrame {
             }
         };
         memberTable = new JTable(memberTableModel);
+        memberTable.setAutoCreateRowSorter(true);
         JScrollPane scrollPane = new JScrollPane(memberTable);
 
         panel.add(form, BorderLayout.NORTH);
@@ -272,6 +274,10 @@ public class LibraryGUI extends JFrame {
         boolean success = library.checkOutBook(memberId, isbn);
         if (success) {
             JOptionPane.showMessageDialog(this, "Book checked out successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                checkoutMemberField.setText("");
+                checkoutIsbnField.setText("");
+
         } else {
             JOptionPane.showMessageDialog(this, "Checkout failed. Ensure the member and book exist and the book is available.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -290,6 +296,8 @@ public class LibraryGUI extends JFrame {
         boolean success = library.returnBook(isbn);
         if (success) {
             JOptionPane.showMessageDialog(this, "Book returned successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+             checkoutIsbnField.setText("");
         } else {
             JOptionPane.showMessageDialog(this, "Return failed. Ensure the book exists and is currently checked out.", "Error", JOptionPane.ERROR_MESSAGE);
         }
